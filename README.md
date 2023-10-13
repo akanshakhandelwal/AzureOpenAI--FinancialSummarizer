@@ -1,7 +1,7 @@
 # FinancialSummarizer
 This repository contains the code for Finanical Summarizer Problem Statement.
 
-##Objective:
+## Objective:
 To conduct a comprehensive analysis to determine whether investing in a particular private bond in India is safe or not for an individual investor, leveraging the capabilities of Generative AI. ​
 
 Analysis should be performed considering various inputs, such as:​
@@ -20,7 +20,7 @@ Analysis should be performed considering various inputs, such as:​
 
 The aim is to provide an AI driven solution that delivers a comprehensive summary to the investor to assist in the decision-making process
 
-##Steps to run: 
+## Steps to run: 
 1. Create a new Conda Environment
 conda create -p finenv python=3.9 -y
 
