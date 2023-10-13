@@ -155,8 +155,8 @@ def profit_loss_azure(bondname):
     from azure.storage.blob import BlobServiceClient
     from langchain.agents import create_pandas_dataframe_agent
     from langchain.chat_models.azure_openai import AzureChatOpenAI
-    STORAGEACCOUNTURL= "https://team4mlworkspa5316178644.blob.core.windows.net/"
-    STORAGEACCOUNTKEY= "J7eE0R/CIeqrJEnoiTaIj28jPRveweU/G695u98uokWfOUIBqHqoIJdkvSz0HVcB3iVYH+MrX2P4+AStgwuhkQ==;"
+    STORAGEACCOUNTURL= os.getenv("STORAGEACCOUNTURL")
+    STORAGEACCOUNTKEY= os.getenv("STORAGEACCOUNTKEY")
     CONTAINERNAME= "azureml"
     LOCALFILENAME="/Users/akansha/Downloads/"+bondname+"_Profit_Loss.xlsx"
     BLOBNAME= bondname+"/"+bondname+".xlsx"
@@ -185,7 +185,38 @@ def profit_loss_azure(bondname):
     print(df)
     return(df.round(0))
 
+def get_bonds(bondname):
+    from azure.storage.blob import BlobServiceClient
+    from langchain.agents import create_pandas_dataframe_agent
+    from langchain.chat_models.azure_openai import AzureChatOpenAI
+    STORAGEACCOUNTURL= os.getenv("STORAGEACCOUNTURL")
+    STORAGEACCOUNTKEY= os.getenv("STORAGEACCOUNTKEY")
+    CONTAINERNAME= "azureml"
+    LOCALFILENAME="/Users/akansha/Downloads/bonds.csv"
+    BLOBNAME= "Bonds.csv"
+    #download from blob
 
+    blob_service_client_instance = BlobServiceClient(account_url=STORAGEACCOUNTURL, credential=STORAGEACCOUNTKEY)
+    blob_client_instance = blob_service_client_instance.get_blob_client(CONTAINERNAME, BLOBNAME, snapshot=None)
+    with open(LOCALFILENAME, "wb") as my_blob:
+        blob_data = blob_client_instance.download_blob()
+        blob_data.readinto(my_blob)
+     
+    if(bondname == "L&T Fin.Holdings" ):
+        bondname = "L & T FINANCE LIMITED"
+    # Read the Excel file and skip rows before row 15
+    df = pd.read_csv(LOCALFILENAME)
+    df_active = df[df['Instrument Status'] == 'Active']
+    df_selected = df_active[df_active['Name of Issuer'].str.contains(bondname, case=False)]
+
+    # Select the columns relevant to the user's request
+    selected_columns = ['ISIN', 'Security Description', 'Face Value(in Rs.)',
+                        'Issue Size(in Rs.)', 'Date of Allotment', 'Date of Redemption/Conversion',
+                        'Coupon Rate (%)', 'Coupon Type', 'Frequency of Interest Payment']
+
+# Create the final DataFrame with the selected columns
+    df_selected = df_selected[selected_columns]
+    return df_selected
 
 
 def find_pdf_and_excel_files(directory):

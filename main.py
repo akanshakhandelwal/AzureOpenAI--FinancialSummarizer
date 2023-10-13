@@ -82,7 +82,7 @@ for indicator, default_value in indicators_defaults.items():
     )
 
 if st.button('Submit'):
-    tab1, tab2 = st.tabs(["Summary", "Charts"])
+    tab1, tab2 , tab3 = st.tabs(["Summary", "Charts", "List of Bonds"])
     with tab1:
         st.subheader("Issuer Details")
         import yfinance as yf
@@ -124,7 +124,9 @@ if st.button('Submit'):
         # axs[1].set_title('Sales')
         # st.pyplot(fig)
 
-  
+    with tab3:
+        df = utils.get_bonds(input_text)
+        st.table(df)
     
     total_weights = sum(selected_weights.values())
     # st.write(dict["trailingPE"])
