@@ -31,14 +31,15 @@ conda activate finenv/
 pip install -r  requirements.txt
 
 4. Create .env file which would contain the keys
-OPENAI_API_KEY 
-OPENAI_API_TYPE 
-OPENAI_API_BASE 
-OPENAI_API_VERSION 
-vector_store_address 
-vector_store_password 
-STORAGEACCOUNTURL
-STORAGEACCOUNTKEY
+
+        OPENAI_API_KEY 
+        OPENAI_API_TYPE 
+        OPENAI_API_BASE 
+        OPENAI_API_VERSION 
+        vector_store_address 
+        vector_store_password 
+        STORAGEACCOUNTURL
+        STORAGEACCOUNTKEY
 
 5. To run the application
 streamlit run main.py
