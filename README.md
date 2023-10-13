@@ -18,15 +18,15 @@ The aim is to provide an AI driven solution that delivers a comprehensive summar
 ## Steps to run: 
 1. Create a new Conda Environment
 
-conda create -p finenv python=3.9 -y
+    conda create -p finenv python=3.9 -y
 
 2. Activate the Environment
 
-conda activate finenv/
+    conda activate finenv/
 
 3. Install the packages in Environmnet
 
-pip install -r  requirements.txt
+    pip install -r  requirements.txt
 
 4. Create .env file which would contain the keys
 
@@ -41,4 +41,4 @@ pip install -r  requirements.txt
 
 5. To run the application
 
-streamlit run main.py
+    streamlit run main.py
