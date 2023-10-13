@@ -17,7 +17,7 @@ from pprint import pprint
 PROMPTS = {
     'credit_ratings': "Extract credit ratings from the document of {}. Score 1-10 based on AAA=10 to D=1 scale. If there is no mention of credit rating, give it a score of 0",
     'debt_to_equity': "Calculate the debt-to-equity ratio from the balance sheet in document of {}. Score: <0.5=10, 0.5-1=8, 1-1.5=6, >1.5=4.",
-    'interest_coverage': "Calculate the interest coverage ratio from the financials in document of {}. Score: >5=10, 3-5=7, 1-3=4, <1=2.",
+    'interest_coverage': "Calculate the interest coverage ratio from the financials in document of {}. Score: >5=10, 3-5=7, 1-3=4, <1=2. ",
     'liquidity_ratio': "Calculate the liquidity ratio in document for {}. Score: >2=10, 1.5-2=8, 1-1.5=6, <1=4.",
     'profit_margin': "Calculate the profit margin in document for {}. Score: >20%=10, 15-20%=8, 10-15%=6, <10%=4.",
     'revenue_growth': "Calculate the revenue growth rate in document for {}. Score: >15%=10, 10-15%=8, 5-10%=6, <5%=4.",

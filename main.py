@@ -31,7 +31,7 @@ input_text=st.selectbox(
 
     'Select the bond name',
 
-    ('Shriram Finance','L&T Fin.Holdings','Coforge'))
+    ('Shriram Finance','L&T Fin.Holdings','Coforge','GMR AIRPORTS LIMITED'))
 
 indicators_defaults = {
 
@@ -39,9 +39,9 @@ indicators_defaults = {
         "Debt to Equity":20,
         "Interest Coverage": 10,
         "Liquidity Ratio": 10,
-        "Profit Margin": 10,
+        "Profit Margin": 15,
         "Revenue Growth": 10,
-        "Management Quality": 10,
+        "Management Quality": 5,
         "Legal Compliance": 10,
    
         
@@ -50,7 +50,8 @@ indicators_defaults = {
 company_tickers={
     'Shriram Finance':'SHRIRAMFIN.NS',
     'L&T Fin.Holdings':'L&TFH.NS',
-    'Coforge':'COFORGE.NS'
+    'Coforge':'COFORGE.NS',
+    'GMR AIRPORTS LIMITED': 'GMRINFRA.NS'
 
 
 }
@@ -94,7 +95,9 @@ if st.button('Submit'):
         # Display data in a structured format
         with col1:
             st.markdown(f"**Sector:** {dict_info['sector']}")
-            st.markdown(f"**Dividend Yield:** {round(dict_info['dividendYield']*100,2)} %")
+            dividendyield = dict_info.get('dividendYield')
+            st.markdown(f"**Dividend Yield:** {round(dividendyield*100,2) if dividendyield is not None else 'N/A'}")
+            # st.markdown(f"**Dividend Yield:** {round(dict_info['dividendYield']*100,2)} %")
             st.markdown(f"**Market Cap:** {round(dict_info['marketCap'] / 1e9, 2)} Billion")
 
             
@@ -108,21 +111,7 @@ if st.button('Submit'):
         df = utils.profit_loss_azure(input_text) 
         st.line_chart(df['Net profit'])
         st.line_chart(df['Sales'])
-        # fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(20, 9))
-
-
-        # axs[0].plot(df['Net profit'])
-        # axs[1].plot(df['Sales'])
-
-
-        # axs[0].set_xlabel('Report Date')
-        # axs[0].set_ylabel('Net Profit')
-        # axs[0].set_title('Net Profit')
-
-        # axs[1].set_xlabel('Report Date')
-        # axs[1].set_ylabel('Sales')
-        # axs[1].set_title('Sales')
-        # st.pyplot(fig)
+        
 
     with tab3:
         df = utils.get_bonds(input_text)
